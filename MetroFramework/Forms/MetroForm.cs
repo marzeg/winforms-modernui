@@ -586,10 +586,13 @@ namespace MetroFramework.Forms
                     OnGetMinMaxInfo(m.HWnd, m.LParam);
                     break;
                  case (int)WinApi.Messages.WM_SIZE:
-                    MetroFormButton btn;
-                    windowButtonList.TryGetValue(WindowButtons.Maximize, out btn);
-                    if (WindowState == FormWindowState.Normal) shadowForm.Visible = true;btn.Text = "1";
-                    if(WindowState== FormWindowState.Maximized) btn.Text = "2";
+                    if (windowButtonList != null)
+                    {
+                        MetroFormButton btn;
+                        windowButtonList.TryGetValue(WindowButtons.Maximize, out btn);
+                        if (WindowState == FormWindowState.Normal) shadowForm.Visible = true;btn.Text = "1";
+                        if(WindowState== FormWindowState.Maximized) btn.Text = "2";
+                    }
                     break;
             }
         }
@@ -1066,6 +1069,10 @@ namespace MetroFramework.Forms
 
                 case MetroFormShadowType.DropShadow:
                     shadowForm = new MetroRealisticDropShadow(this);
+                    return;
+                    
+                default:
+                    shadowForm = new MetroFlatDropShadow(this);
                     return;
             }
         }
