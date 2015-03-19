@@ -590,8 +590,15 @@ namespace MetroFramework.Forms
                     {
                         MetroFormButton btn;
                         windowButtonList.TryGetValue(WindowButtons.Maximize, out btn);
-                        if (WindowState == FormWindowState.Normal) shadowForm.Visible = true;btn.Text = "1";
-                        if(WindowState== FormWindowState.Maximized) btn.Text = "2";
+                        if (WindowState == FormWindowState.Normal)
+                        {
+                            if(shadowForm != null ) shadowForm.Visible = true; 
+                            btn.Text = "1";
+                        }
+                        if (WindowState == FormWindowState.Maximized)
+                        {
+                            btn.Text = "2";
+                        }
                     }
                     break;
             }
